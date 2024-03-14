@@ -8,5 +8,5 @@ interface NewsRepo {
     suspend fun getAllNews(
         country: String = "us",
         apiKey: String = Constants.API_KEY
-    )
+    ):News
 }

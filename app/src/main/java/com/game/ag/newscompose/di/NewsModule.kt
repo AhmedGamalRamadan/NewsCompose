@@ -22,25 +22,25 @@ object NewsModule {
 
     @Provides
     @Singleton
-    fun provideInterceptor():HttpLoggingInterceptor{
+    fun provideInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
     }
 
 
     @Provides
     @Singleton
-    fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttp(): OkHttpClient {
 
         return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .connectTimeout(20,TimeUnit.MILLISECONDS)
-            .readTimeout(20,TimeUnit.MILLISECONDS)
+            .addInterceptor(HttpLoggingInterceptor())
+            .connectTimeout(20, TimeUnit.MILLISECONDS)
+            .readTimeout(20, TimeUnit.MILLISECONDS)
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideRetrofit():NewsAPIServices{
+    fun provideRetrofit(): NewsAPIServices {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -50,10 +50,9 @@ object NewsModule {
 
     @Provides
     @Singleton
-    fun providesRepo(newsAPIServices: NewsAPIServices):NewsRepo{
+    fun providesRepo(newsAPIServices: NewsAPIServices): NewsRepo {
         return NewsRepoImpl(newsAPIServices)
     }
-
 
 
 }
