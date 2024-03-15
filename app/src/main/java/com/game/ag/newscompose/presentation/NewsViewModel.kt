@@ -1,18 +1,13 @@
 package com.game.ag.newscompose.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.game.ag.newscompose.data.repository.NewsRepoImpl
 import com.game.ag.newscompose.domain.model.Article
-import com.game.ag.newscompose.domain.model.News
 import com.game.ag.newscompose.domain.repository.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,24 +16,40 @@ class NewsViewModel @Inject constructor(
 ) : ViewModel() {
 
     init {
-        getTopHeadMovies()
+        getSportsNews()
+        getBusinessNews()
+        getGeneralNews()
+    }
+    private val _sportNewsList = MutableStateFlow<List<Article>>(emptyList())
+    val sportNewsList = _sportNewsList.asStateFlow()
+
+
+    private val _businessNewsList = MutableStateFlow<List<Article>>(emptyList())
+    val businessNewsList = _businessNewsList.asStateFlow()
+
+    private val _generalNewsList =MutableStateFlow<List<Article>>(emptyList())
+    val generalNewsList = _generalNewsList.asStateFlow()
+
+
+    private fun getSportsNews() {
+        viewModelScope.launch {
+            val sportNewsResult = newsRepo.getAllNews(category = "sports")
+            _sportNewsList.value = sportNewsResult.articles
+
+        }
     }
 
-    private val _topHeadMovies = MutableStateFlow<List<Article>>(emptyList())
-    val topHeadMovie = _topHeadMovies.asStateFlow()
-
-
-     private fun getTopHeadMovies() {
+    private fun getBusinessNews() {
         viewModelScope.launch {
-            try {
-                val result = newsRepo.getAllNews()
-                    _topHeadMovies.value = result.articles
+            val businessNewsResult = newsRepo.getAllNews(category = "business")
+            _businessNewsList.value = businessNewsResult.articles
+        }
+    }
 
-            } catch (e: IOException) {
-                Log.d("NewsViewModel", e.message.toString())
-            }
-
-
+    private fun getGeneralNews() {
+        viewModelScope.launch {
+            val generalNewsResult = newsRepo.getAllNews(category = "general")
+            _generalNewsList.value = generalNewsResult.articles
         }
     }
 }

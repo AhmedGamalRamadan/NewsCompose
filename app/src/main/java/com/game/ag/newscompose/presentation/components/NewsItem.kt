@@ -3,14 +3,19 @@ package com.game.ag.newscompose.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.rounded.Downloading
+import androidx.compose.material.icons.rounded.ImageNotSupported
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,22 +23,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.game.ag.newscompose.R
 import com.game.ag.newscompose.domain.model.Article
-import com.game.ag.newscompose.domain.model.Source
 
 
 @Composable
 fun NewsItem(article: Article) {
+
+
+    val imageState = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(article.urlToImage)
+            .size(Size.ORIGINAL)
+            .build()
+    )
 
     Card(
         modifier = Modifier
@@ -45,13 +53,6 @@ fun NewsItem(article: Article) {
 
         Column(Modifier.padding(8.dp)) {
 
-            val imageState = rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(article.urlToImage)
-                    .size(Size.ORIGINAL)
-                    .build()
-            )
-
             when (imageState.state) {
 
                 is AsyncImagePainter.State.Success -> {
@@ -59,7 +60,8 @@ fun NewsItem(article: Article) {
                     Image(
                         modifier = Modifier
                             .padding(5.dp)
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .height(250.dp),
                         painter = imageState,
                         contentDescription = article.title,
                         contentScale = ContentScale.Crop
@@ -67,38 +69,48 @@ fun NewsItem(article: Article) {
                 }
 
                 is AsyncImagePainter.State.Error -> {
-                    Image(
+                    Box(
                         modifier = Modifier
-                            .padding(5.dp)
-                            .fillMaxWidth(),
-                        painter = painterResource(id = R.drawable.ic_error),
-                        contentDescription = "Error"
-                    )
+                            .fillMaxWidth()
+                            .height(250.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.ImageNotSupported,
+                            contentDescription = article.title,
+                            modifier= Modifier.fillMaxSize()
+                        )
+                    }
+
                 }
 
                 is AsyncImagePainter.State.Loading -> {
 
-                    Image(
+                    Box(
                         modifier = Modifier
-                            .padding(5.dp)
-                            .fillMaxWidth(),
-                        painter = painterResource(id = R.drawable.ic_loading),
-                        contentDescription = "Loading"
-                    )
+                            .fillMaxWidth()
+                            .height(250.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Downloading,
+                            contentDescription = article.title,
+                            modifier= Modifier.fillMaxSize()
+                        )
+                    }
+
                 }
 
                 else -> {}
             }
 
-            Spacer(modifier = Modifier.width(5.dp))
-
-
 
             Text(
                 text = article.source.name,
                 color = Color.Black,
-                fontSize = 15.sp,
-                modifier = Modifier.align(Alignment.Start)
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .padding(8.dp)
 
             )
 
@@ -106,33 +118,24 @@ fun NewsItem(article: Article) {
                 text = article.title,
                 color = Color.Black,
                 fontSize = 13.sp,
+                modifier = Modifier
+                    .padding(5.dp)
             )
-
 
             Text(
                 text = article.publishedAt,
                 color = Color.Black,
                 fontSize = 15.sp,
-                modifier = Modifier.align(Alignment.End)
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(8.dp)
             )
-
+            Icon(
+                imageVector = Icons.Default.FavoriteBorder,
+                contentDescription = "Favorite",
+            )
         }
     }
-}
-
-
-@Preview
-@Composable
-fun MovieItemPreview() {
-
-    val source = Source("cnn", "CNN")
-    val article = Article(
-        "BBC",
-        "all sources not Newsall sources not Newsall sources not News",
-        "The new Mercedes-AMG E53 sedan and wagon share an inline-six engine and electric motor that deliver a combined 603 hp when launch control is activated",
-        "2024-3-3", source, "Real Madrid", "", ""
-    )
-    NewsItem(article)
 }
 
 

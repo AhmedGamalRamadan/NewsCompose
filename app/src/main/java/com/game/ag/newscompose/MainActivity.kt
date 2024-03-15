@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.game.ag.newscompose.presentation.NewsViewModel
+import com.game.ag.newscompose.presentation.screen.BusinessNewsScreen
+import com.game.ag.newscompose.presentation.screen.GeneralNewsScreen
 import com.game.ag.newscompose.ui.theme.NewsComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
-import com.game.ag.newscompose.presentation.screen.HomeScreen
+import com.game.ag.newscompose.presentation.screen.SportNewsScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -18,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
                 val viewModel = hiltViewModel<NewsViewModel>()
 
-                HomeScreen(viewModel)
+                GeneralNewsScreen(viewModel)
 
 
             }

@@ -10,9 +10,9 @@ interface NewsAPIServices {
     @GET("top-headlines")
     suspend fun getAllNews(
         @Query("country") country:String="us",
+        @Query("category") category:String,
         @Query("apiKey") apiKey:String=Constants.API_KEY
     ):News
 }
 
-
-//https://newsapi.org/v2/top-headlines?country=us&apiKey=ece0393f10644b12bac90080fddfb6b7
+//https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=ece0393f10644b12bac90080fddfb6b7

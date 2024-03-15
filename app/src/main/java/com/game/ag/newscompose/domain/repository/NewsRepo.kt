@@ -7,6 +7,7 @@ interface NewsRepo {
 
     suspend fun getAllNews(
         country: String = "us",
+        category:String,
         apiKey: String = Constants.API_KEY
     ):News
 }

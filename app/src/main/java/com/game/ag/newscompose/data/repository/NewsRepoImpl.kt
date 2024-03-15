@@ -5,8 +5,8 @@ import com.game.ag.newscompose.domain.repository.NewsRepo
 
 class NewsRepoImpl(private val newsAPIServices: NewsAPIServices) : NewsRepo {
 
-    override suspend fun getAllNews(country: String, apiKey: String) =
-        newsAPIServices.getAllNews(country, apiKey)
+    override suspend fun getAllNews(country: String, category: String, apiKey: String) =
+        newsAPIServices.getAllNews(country, category, apiKey)
 
 
 }
