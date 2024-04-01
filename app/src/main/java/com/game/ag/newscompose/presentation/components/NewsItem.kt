@@ -155,13 +155,10 @@ fun NewsItem(article: Article) {
                     contentDescription = "Favorite",
                 )
             }
-
-
-
         }
     }
 }
-//save Icon
+
 
 
 
