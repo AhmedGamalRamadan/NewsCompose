@@ -32,16 +32,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.game.ag.newscompose.domain.model.Article
+import com.game.ag.newscompose.util.Constants
 
 
 @Composable
-fun NewsItem(article: Article) {
+fun NewsItem(
+    article: Article,
+    navHostController: NavHostController
+) {
 
+    val context =LocalContext.current
     var isChecked by remember {
         mutableStateOf(false)
     }
@@ -60,11 +66,17 @@ fun NewsItem(article: Article) {
 
 
     Card(
+        shape = RoundedCornerShape(14.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(15.dp)
-            .background(Color.White),
-        shape = RoundedCornerShape(14.dp),
+            .background(Color.White)
+            .clickable{
+
+              navHostController.navigate(Constants.DETAILS +"/${article.title}/${article.description}/${article.source.name}/${article.publishedAt}")
+
+            }
+
     ) {
 
         Column(Modifier.padding(8.dp)) {

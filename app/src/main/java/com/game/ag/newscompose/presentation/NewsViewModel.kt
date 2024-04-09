@@ -15,6 +15,9 @@ class NewsViewModel @Inject constructor(
     private val newsRepo: NewsRepo
 ) : ViewModel() {
 
+    init {
+        getNews("General")
+    }
 
     private val _newsResponse = MutableStateFlow<List<Article>>(emptyList())
     val newsResponse = _newsResponse.asStateFlow()
@@ -24,6 +27,7 @@ class NewsViewModel @Inject constructor(
         viewModelScope.launch {
             val newsResult = newsRepo.getAllNews(category = category)
             _newsResponse.value = newsResult.articles
+
         }
     }
 }

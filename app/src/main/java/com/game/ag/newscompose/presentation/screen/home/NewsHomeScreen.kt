@@ -1,4 +1,5 @@
-package com.game.ag.newscompose.presentation.screen
+package com.game.ag.newscompose.presentation.screen.home
+
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,7 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -18,18 +21,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.game.ag.newscompose.presentation.NewsViewModel
 import com.game.ag.newscompose.presentation.components.NewsItem
+import com.game.ag.newscompose.presentation.components.SearchTextField
+
+
 
 @Composable
-fun NewsHomeScreen(viewModel: NewsViewModel) {
+fun NewsHomeScreen(
+    navController: NavHostController
+) {
 
+
+    val viewModel = hiltViewModel<NewsViewModel>()
     val generalNewsResponse = viewModel.newsResponse.collectAsState().value
 
-    val categoryList = listOf("General", "Business", "Technology", "Sports", "Science", "Health","Entertainment")
+
+    val categoryList =
+        listOf("General", "Business", "Technology", "Sports", "Science", "Health", "Entertainment")
 
 
     Column {
+
+      SearchTextField()
 
         LazyRow {
             items(categoryList) { item ->
@@ -62,9 +78,11 @@ fun NewsHomeScreen(viewModel: NewsViewModel) {
             }
         } else {
             LazyColumn {
-
                 items(generalNewsResponse) { article ->
-                    NewsItem(article = article)
+                    NewsItem(
+                        article = article,
+                        navHostController = navController
+                    )
                 }
             }
 
