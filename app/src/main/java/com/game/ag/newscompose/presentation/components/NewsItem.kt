@@ -47,7 +47,6 @@ fun NewsItem(
     navHostController: NavHostController
 ) {
 
-    val context =LocalContext.current
     var isChecked by remember {
         mutableStateOf(false)
     }

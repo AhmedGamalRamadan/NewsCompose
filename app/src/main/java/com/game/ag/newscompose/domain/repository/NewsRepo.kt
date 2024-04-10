@@ -9,7 +9,6 @@ interface NewsRepo {
     ): News
 
     suspend fun getNewsByName(
-        q: String,
+        q: String
     ): News
-
 }

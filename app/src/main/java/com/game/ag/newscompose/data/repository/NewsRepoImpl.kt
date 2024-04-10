@@ -1,7 +1,6 @@
 package com.game.ag.newscompose.data.repository
 
 import com.game.ag.newscompose.data.remote.NewsAPIServices
-import com.game.ag.newscompose.domain.model.News
 import com.game.ag.newscompose.domain.repository.NewsRepo
 
 class NewsRepoImpl(private val newsAPIServices: NewsAPIServices) : NewsRepo {
