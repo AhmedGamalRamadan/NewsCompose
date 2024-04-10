@@ -1,5 +1,6 @@
 package com.game.ag.newscompose.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.game.ag.newscompose.domain.model.Article
@@ -19,17 +20,33 @@ class NewsViewModel @Inject constructor(
         getNews("General")
     }
 
-    private val _newsResponse = MutableStateFlow<List<Article>>(emptyList())
-    val newsResponse = _newsResponse.asStateFlow()
+    private val _allNewsResponse = MutableStateFlow<List<Article>>(emptyList())
+    val allNewsResponse = _allNewsResponse.asStateFlow()
 
 
     fun getNews(category: String) {
         viewModelScope.launch {
-            val newsResult = newsRepo.getAllNews(category = category)
-            _newsResponse.value = newsResult.articles
+            try {
+                val newsResult = newsRepo.getAllNews(category = category)
+                _allNewsResponse.value = newsResult.articles
+            } catch (e: Exception) {
+                Log.d("viewModel", e.message.toString())
+            }
+        }
+    }
+
+    fun getNewsByName(newsName: String) {
+        viewModelScope.launch {
+            try {
+                _allNewsResponse.value = newsRepo.getNewsByName(newsName).articles
+
+            } catch (e: Exception) {
+                Log.d("viewModel", e.message.toString())
+            }
 
         }
     }
+
 }
 
 
