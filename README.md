@@ -42,4 +42,9 @@ This project is still under development and certain features may be incomplete o
 	<td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/2cf27d41-1f9f-4440-973a-0af98f409fc1" alt="splash" width="230"></td>
   
   </tr>
+    <tr>
+    <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/771d4a81-fcd8-40df-b987-cc0183db1965" alt="splash" width="230"></td>
+	<td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/a4adae48-47c5-47d6-b3a7-490ec7291808" alt="splash" width="230"></td>
+	
+  </tr>
 </table>
