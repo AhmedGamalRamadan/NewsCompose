@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -15,6 +16,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,28 +43,34 @@ fun NewsHomeScreen(
     val categoryList =
         listOf("General", "Business", "Technology", "Sports", "Science", "Health", "Entertainment")
 
+    var categorySelectedIndex by remember { mutableIntStateOf(0) }
+
+
 
     Column {
 
-        EditTextSearch()
+            EditTextSearch()
 
         LazyRow {
-            items(categoryList) { item ->
+            itemsIndexed(categoryList) { index, item ->
+                val isSelected = index == categorySelectedIndex
 
                 Button(
                     modifier = Modifier.padding(4.dp),
-                    onClick = { viewModel.getNews(item) },
+                    onClick = {
+                        categorySelectedIndex = index
+                        viewModel.getNews(item)
+                    },
                     shape = RoundedCornerShape(20.dp),
                     colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Black,
-                        containerColor = Color.White,
+                        contentColor = if (isSelected) Color.White else Color.Black,
+                        containerColor = if (isSelected) Color.Blue else Color.White
                     ),
                     elevation = ButtonDefaults.buttonElevation(
                         pressedElevation = 13.dp,
                         defaultElevation = 2.dp
                     )
-                )
-                {
+                ) {
                     Text(text = item)
                 }
             }
