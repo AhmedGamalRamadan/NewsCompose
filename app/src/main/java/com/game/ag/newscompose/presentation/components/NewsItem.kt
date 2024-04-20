@@ -39,6 +39,7 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.game.ag.newscompose.domain.model.Article
 import com.game.ag.newscompose.util.Constants
+import com.game.ag.newscompose.util.Screen
 
 
 @Composable
@@ -72,7 +73,7 @@ fun NewsItem(
             .background(Color.White)
             .clickable{
 
-              navHostController.navigate(Constants.DETAILS +"/${article.title}/${article.description}/${article.source.name}/${article.publishedAt}")
+              navHostController.navigate(Screen.DetailsScreen.rout +"/${article.title}/${article.description}/${article.source.name}/${article.publishedAt}")
 
             }
 

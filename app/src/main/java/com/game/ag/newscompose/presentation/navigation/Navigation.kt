@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.game.ag.newscompose.presentation.screen.home.NewsHomeScreen
 import com.game.ag.newscompose.presentation.screen.details.DetailsScreen
 import com.game.ag.newscompose.util.Constants
+import com.game.ag.newscompose.util.Screen
 
 @Composable
 fun Navigation() {
@@ -17,15 +18,15 @@ fun Navigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Constants.HOME
+        startDestination = Screen.HomeScreen.rout
     ) {
 
-        composable(Constants.HOME) {
+        composable(Screen.HomeScreen.rout) {
             NewsHomeScreen(navController)
         }
 
         composable(
-            Constants.DETAILS + "/{newsTitle}/{newsDescription}/{newsSourceName}/{newsDate}",
+            Screen.DetailsScreen.rout + "/{newsTitle}/{newsDescription}/{newsSourceName}/{newsDate}",
             arguments = listOf(
                 navArgument("newsTitle") { type = NavType.StringType },
                 navArgument("newsDescription") { type = NavType.StringType },

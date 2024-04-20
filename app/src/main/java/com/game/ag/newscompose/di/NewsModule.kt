@@ -1,5 +1,8 @@
 package com.game.ag.newscompose.di
 
+import android.app.Application
+import androidx.room.Room
+import com.game.ag.newscompose.data.local.NewsDatabase
 import com.game.ag.newscompose.data.remote.NewsAPIServices
 import com.game.ag.newscompose.data.repository.NewsRepoImpl
 import com.game.ag.newscompose.domain.repository.NewsRepo
@@ -23,7 +26,7 @@ object NewsModule {
     @Provides
     @Singleton
     fun provideInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
 
@@ -52,6 +55,16 @@ object NewsModule {
     @Singleton
     fun providesRepo(newsAPIServices: NewsAPIServices): NewsRepo {
         return NewsRepoImpl(newsAPIServices)
+    }
+
+    @Provides
+    @Singleton
+    fun providesMovieDatabase(app: Application):NewsDatabase {
+        return Room.databaseBuilder(
+            app,
+            NewsDatabase::class.java,
+            "news.db"
+        ).build()
     }
 
 
