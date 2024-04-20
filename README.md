@@ -31,20 +31,23 @@ This project is still under development and certain features may be incomplete o
 <table>
   
   <tr>
-    <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/3bf79de5-3956-48e7-881e-66bb38fd0a4f" alt="splash" width="230"></td>
-	<td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/4b5d5a69-5107-49a5-924b-3916dc31c47d" alt="splash" width="230"></td>
-	<td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/a3c75a3b-3e4c-490a-939d-b60afc429232" alt="splash" width="230"></td>
+    <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/749fb86c-e9fd-4b3c-b2a5-f1d9d658c8ff" alt="splash" width="230"></td>
+     <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/bf640336-3449-493a-91e8-243213462e22" alt="splash" width="230"></td>
+      <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/37339933-f9d6-4514-b0c4-93cb5f3819f7" alt="splash" width="230"></td>
+  </tr>
+    <tr>
+   <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/f3fd73d2-388b-41df-a8b2-834e65e54956" alt="splash" width="230"></td>
+     <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/2f2ecfe4-18e2-469b-a46f-b9f80a8d10eb" alt="splash" width="230"></td>
+      <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/91f9e5e8-8803-47b0-899c-5a90cf36479f" alt="splash" width="230"></td>
   
   </tr>
     <tr>
-    <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/afe5ee82-b9d2-4b1e-9567-47cdf5921eb3" alt="splash" width="230"></td>
-	<td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/e7e5122e-f396-432c-9d60-c4a302cc4eb7" alt="splash" width="230"></td>
-	<td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/2cf27d41-1f9f-4440-973a-0af98f409fc1" alt="splash" width="230"></td>
+      <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/cb7a2008-1e0a-49bd-8fbc-236c27a1f7c3" alt="splash" width="230"></td>
+       <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/bb35b49e-46ce-4314-b44c-f3680726a5ee" alt="splash" width="230"></td>
+     <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/c90dfbf5-0b1f-477c-addb-79b3c232679d" alt="splash" width="230"></td>
+  </tr>
+  <tr>
+        <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/3e62f33f-3d3b-4278-8e07-2d6cbf0ec522" alt="splash" width="230"></td>
+  </tr>
   
-  </tr>
-    <tr>
-    <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/771d4a81-fcd8-40df-b987-cc0183db1965" alt="splash" width="230"></td>
-	<td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/a4adae48-47c5-47d6-b3a7-490ec7291808" alt="splash" width="230"></td>
-	
-  </tr>
 </table>
