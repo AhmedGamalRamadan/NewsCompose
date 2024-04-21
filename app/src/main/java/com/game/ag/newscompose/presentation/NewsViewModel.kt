@@ -17,14 +17,14 @@ class NewsViewModel @Inject constructor(
 ) : ViewModel() {
 
     init {
-        getNews("General")
+        getNewsByCategory("General")
     }
 
     private val _allNewsResponse = MutableStateFlow<List<Article>>(emptyList())
     val allNewsResponse = _allNewsResponse.asStateFlow()
 
 
-    fun getNews(category: String) {
+    fun getNewsByCategory(category: String) {
         viewModelScope.launch {
             try {
                 val newsResult = newsRepo.getAllNews(category = category)
@@ -44,6 +44,39 @@ class NewsViewModel @Inject constructor(
                 Log.d("viewModel", e.message.toString())
             }
 
+        }
+    }
+
+
+    //deals with database
+
+    fun getFavoriteNews() {
+        viewModelScope.launch {
+            try {
+                _allNewsResponse.value = newsRepo.getAllNewsFavorite()
+
+            } catch (e: Exception) {
+                Log.d("viewModel", e.message.toString())
+
+            }
+        }
+    }
+
+    fun toggleFavorite(article: Article) {
+
+        article.isFavorite = !article.isFavorite
+
+        viewModelScope.launch {
+            try {
+                if (article.isFavorite) {
+                    newsRepo.insertNews(article)
+                } else {
+                    newsRepo.deleteNews(article)
+                }
+            } catch (e: Exception) {
+                Log.d("viewModel", e.message.toString())
+
+            }
         }
     }
 

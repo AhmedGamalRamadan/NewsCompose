@@ -38,19 +38,17 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.game.ag.newscompose.domain.model.Article
-import com.game.ag.newscompose.util.Constants
 import com.game.ag.newscompose.util.Screen
 
 
 @Composable
 fun NewsItem(
     article: Article,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    onClick: () -> Unit
 ) {
 
-    var isChecked by remember {
-        mutableStateOf(false)
-    }
+    var isFavorite by remember { mutableStateOf(article.isFavorite) }
 
     val imageState = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
@@ -58,7 +56,8 @@ fun NewsItem(
             .size(Size.ORIGINAL)
             .build()
     )
-    val favoriteIcon: ImageVector = if (isChecked) {
+
+    val favoriteIcon: ImageVector = if (isFavorite) {
         Icons.Default.Favorite
     } else {
         Icons.Default.FavoriteBorder
@@ -71,9 +70,9 @@ fun NewsItem(
             .fillMaxWidth()
             .padding(15.dp)
             .background(Color.White)
-            .clickable{
+            .clickable {
 
-              navHostController.navigate(Screen.DetailsScreen.rout +"/${article.title}/${article.description}/${article.source.name}/${article.publishedAt}")
+                navHostController.navigate(Screen.DetailsScreen.rout + "/${article.title}/${article.description}/${article.source.name}/${article.publishedAt}")
 
             }
 
@@ -160,7 +159,9 @@ fun NewsItem(
             )
 
             Box(Modifier.clickable {
-                isChecked =!isChecked
+                isFavorite = !isFavorite
+                onClick()
+
             }) {
                 Icon(
                     imageVector = favoriteIcon,
@@ -170,8 +171,6 @@ fun NewsItem(
         }
     }
 }
-
-
 
 
 

@@ -13,9 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NewsComposeTheme {
-
                 Navigation()
-
             }
         }
     }

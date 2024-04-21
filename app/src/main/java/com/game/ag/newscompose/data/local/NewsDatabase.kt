@@ -4,13 +4,16 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.game.ag.newscompose.data.converter.Converters
+import com.game.ag.newscompose.domain.model.Article
 
 @Database(
-    entities = [ArticleEntity::class],
+    entities = [Article::class],
     version = 1,
-    exportSchema = false)
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
-abstract class NewsDatabase :RoomDatabase(){
+abstract class NewsDatabase : RoomDatabase() {
 
-    abstract fun newsDao():NewsDao
+    abstract fun newsDao(): NewsDao
+
 }

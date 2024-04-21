@@ -1,5 +1,6 @@
 package com.game.ag.newscompose.di
 
+
 import android.app.Application
 import androidx.room.Room
 import com.game.ag.newscompose.data.local.NewsDatabase
@@ -12,7 +13,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -53,20 +53,21 @@ object NewsModule {
 
     @Provides
     @Singleton
-    fun providesRepo(newsAPIServices: NewsAPIServices): NewsRepo {
-        return NewsRepoImpl(newsAPIServices)
+    fun providesRepo(newsAPIServices: NewsAPIServices,newsDatabase: NewsDatabase): NewsRepo {
+        return NewsRepoImpl(newsAPIServices,newsDatabase)
     }
+
 
     @Provides
     @Singleton
-    fun providesMovieDatabase(app: Application):NewsDatabase {
+    fun providesNewsDatabase(app: Application): NewsDatabase {
         return Room.databaseBuilder(
             app,
             NewsDatabase::class.java,
-            "news.db"
-        ).build()
+            Constants.DATABASE_NAME
+        ).fallbackToDestructiveMigration()
+            .build()
     }
-
 
 }
 

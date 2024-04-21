@@ -5,17 +5,18 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.game.ag.newscompose.domain.model.Article
 
 
 @Dao
 interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNews(articleEntity: ArticleEntity)
+    suspend fun insertNews(article: Article)
 
     @Delete
-    suspend fun deleteNews(articleEntity: ArticleEntity)
+    suspend fun deleteNews(article: Article)
 
     @Query("SELECT * FROM news_table")
-    suspend fun getAllNewsFavorite():List<ArticleEntity>
+    suspend fun getAllNewsFavorite():List<Article>
 }

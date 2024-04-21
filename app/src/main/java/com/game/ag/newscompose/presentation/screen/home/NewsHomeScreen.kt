@@ -35,31 +35,41 @@ fun NewsHomeScreen(
     navController: NavHostController
 ) {
 
-
     val viewModel = hiltViewModel<NewsViewModel>()
-    val generalNewsResponse = viewModel.allNewsResponse.collectAsState().value
-
+    val newsResponse = viewModel.allNewsResponse.collectAsState().value
 
     val categoryList =
-        listOf("General", "Business", "Technology", "Sports", "Science", "Health", "Entertainment")
+        listOf(
+            "General",
+            "Business",
+            "Technology",
+            "Sports",
+            "Science",
+            "Health",
+            "Entertainment",
+            "Saved"
+        )
 
     var categorySelectedIndex by remember { mutableIntStateOf(0) }
 
 
-
     Column {
 
-            EditTextSearch()
+        EditTextSearch()
 
         LazyRow {
-            itemsIndexed(categoryList) { index, item ->
+            itemsIndexed(categoryList) { index, category ->
                 val isSelected = index == categorySelectedIndex
 
                 Button(
                     modifier = Modifier.padding(4.dp),
                     onClick = {
                         categorySelectedIndex = index
-                        viewModel.getNews(item)
+                        if (category == "Saved") {
+                            viewModel.getFavoriteNews()
+                        } else {
+                            viewModel.getNewsByCategory(category)
+                        }
                     },
                     shape = RoundedCornerShape(20.dp),
                     colors = ButtonDefaults.buttonColors(
@@ -71,12 +81,12 @@ fun NewsHomeScreen(
                         defaultElevation = 2.dp
                     )
                 ) {
-                    Text(text = item)
+                    Text(text = category)
                 }
             }
         }
 
-        if (generalNewsResponse.isEmpty()) {
+        if (newsResponse.isEmpty()) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -85,11 +95,15 @@ fun NewsHomeScreen(
             }
         } else {
             LazyColumn {
-                items(generalNewsResponse) { article ->
+                items(newsResponse) { article ->
                     NewsItem(
                         article = article,
                         navHostController = navController
-                    )
+                    ) {
+                        viewModel.toggleFavorite(article)
+
+                    }
+
                 }
             }
         }
