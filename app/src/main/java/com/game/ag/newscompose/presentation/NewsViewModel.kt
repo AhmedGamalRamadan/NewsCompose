@@ -30,7 +30,7 @@ class NewsViewModel @Inject constructor(
                 val newsResult = newsRepo.getAllNews(category = category)
                 _allNewsResponse.value = newsResult.articles
             } catch (e: Exception) {
-                Log.d("viewModel", e.message.toString())
+                Log.d("viewModel","Error getting news by category: ${e.message.toString()}")
             }
         }
     }
@@ -41,7 +41,7 @@ class NewsViewModel @Inject constructor(
                 _allNewsResponse.value = newsRepo.getNewsByName(newsName).articles
 
             } catch (e: Exception) {
-                Log.d("viewModel", e.message.toString())
+                Log.d("viewModel","Error getting news by name: ${e.message.toString()}")
             }
 
         }
@@ -56,7 +56,8 @@ class NewsViewModel @Inject constructor(
                 _allNewsResponse.value = newsRepo.getAllNewsFavorite()
 
             } catch (e: Exception) {
-                Log.d("viewModel", e.message.toString())
+
+                Log.d("viewModel","Error getting favorite news: ${e.message.toString()}")
 
             }
         }
@@ -74,7 +75,8 @@ class NewsViewModel @Inject constructor(
                     newsRepo.deleteNews(article)
                 }
             } catch (e: Exception) {
-                Log.d("viewModel", e.message.toString())
+                Log.d("viewModel","Error getting toggling favorite news: ${e.message.toString()}")
+
 
             }
         }

@@ -53,7 +53,7 @@ fun NewsHomeScreen(
     var categorySelectedIndex by remember { mutableIntStateOf(0) }
 
 
-    Column {
+    Column{
 
         EditTextSearch()
 
@@ -86,26 +86,52 @@ fun NewsHomeScreen(
             }
         }
 
-        if (newsResponse.isEmpty()) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            LazyColumn {
-                items(newsResponse) { article ->
-                    NewsItem(
-                        article = article,
-                        navHostController = navController
-                    ) {
-                        viewModel.toggleFavorite(article)
+        if (categorySelectedIndex == categoryList.indexOf("Saved")) {
+            if (newsResponse.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "You haven't saved any articles yet"
+                    )
+                }
+            } else {
+                LazyColumn {
+                    items(newsResponse) { article ->
+                        NewsItem(
+                            article = article,
+                            navHostController = navController
+                        ) {
+                            viewModel.toggleFavorite(article)
+
+                        }
 
                     }
+                }
+            }
 
+        } else {
+            if (newsResponse.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            } else {
+                LazyColumn {
+                    items(newsResponse) { article ->
+                        NewsItem(
+                            article = article,
+                            navHostController = navController
+                        ) {
+                            viewModel.toggleFavorite(article)
+                        }
+                    }
                 }
             }
         }
     }
+
 }
