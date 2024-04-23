@@ -7,15 +7,11 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern to 
 ## Features:
 - **Jetpack Compose:** The app leverages *Jetpack Compose*, a modern Android UI toolkit, to create a seamless and interactive user experience.
 - **Kotlin:** Developed entirely in *Kotlin*, the codebase benefits from the conciseness and expressiveness of the language, promoting efficient and readable code.
+- **Shimmer Effect:** Utilizes the shimmer effect to provide users with visual feedback while content is loading, enhancing the overall user experience by reducing perceived loading times.
 - **Retrofit:** Fetches news articles from an API.
+- **Dependency Injection:** Employing dependency injection enhances the app's maintainability and testability by decoupling components and facilitating easier component replacement and testing.
+- **Network Connectivity Check:** The app includes functionality to check for network connectivity, ensuring a seamless experience by handling scenarios where the device may be offline or have limited connectivity.
 - **Implements MVVM architecture for clean and organized code.**
-
-## Work in Progress
-This project is still under development and certain features may be incomplete or subject to change. Here's what's currently in progress:
-
-- **Implementing UI for displaying news articles.**
-- **Adding functionality to fetch news articles from the API.**
-
 
 ## Installation
 1. **Clone the Repository**: Clone this repository to your local machine.
