@@ -95,4 +95,5 @@ dependencies {
     // Extended Icons
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
 
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
 }

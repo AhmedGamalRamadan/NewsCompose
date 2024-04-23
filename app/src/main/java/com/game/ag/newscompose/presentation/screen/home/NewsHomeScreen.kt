@@ -23,20 +23,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.game.ag.newscompose.presentation.NewsViewModel
 import com.game.ag.newscompose.presentation.components.NewsItem
 import com.game.ag.newscompose.presentation.components.EditTextSearch
+import com.game.ag.newscompose.util.checkWifiConnection
 
 @Composable
 fun NewsHomeScreen(
     navController: NavHostController
 ) {
 
+    val context = LocalContext.current
+
     val viewModel = hiltViewModel<NewsViewModel>()
-    val newsResponse = viewModel.allNewsResponse.collectAsState().value
+    val newsResponse by viewModel.allNewsResponse.collectAsState()
 
     val categoryList =
         listOf(
@@ -49,11 +53,11 @@ fun NewsHomeScreen(
             "Entertainment",
             "Saved"
         )
+    val wifiConnected = checkWifiConnection(context)
 
     var categorySelectedIndex by remember { mutableIntStateOf(0) }
 
-
-    Column{
+    Column {
 
         EditTextSearch()
 
@@ -104,17 +108,25 @@ fun NewsHomeScreen(
                             navHostController = navController
                         ) {
                             viewModel.toggleFavorite(article)
-
                         }
-
                     }
                 }
             }
 
         } else {
-            if (newsResponse.isEmpty()) {
+            if (!wifiConnected) {
                 Box(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "Check Wifi connection")
+                }
+            } else if (newsResponse.isEmpty()) {
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
@@ -135,3 +147,5 @@ fun NewsHomeScreen(
     }
 
 }
+
+
