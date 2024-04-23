@@ -1,4 +1,4 @@
-package com.game.ag.newscompose.presentation
+package com.game.ag.newscompose.presentation.screen
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -23,14 +23,13 @@ class NewsViewModel @Inject constructor(
     private val _allNewsResponse = MutableStateFlow<List<Article>>(emptyList())
     val allNewsResponse = _allNewsResponse.asStateFlow()
 
-
     fun getNewsByCategory(category: String) {
         viewModelScope.launch {
             try {
                 val newsResult = newsRepo.getAllNews(category = category)
                 _allNewsResponse.value = newsResult.articles
             } catch (e: Exception) {
-                Log.d("viewModel","Error getting news by category: ${e.message.toString()}")
+                Log.d("viewModel", "Error getting news by category: ${e.message.toString()}")
             }
         }
     }
@@ -41,14 +40,12 @@ class NewsViewModel @Inject constructor(
                 _allNewsResponse.value = newsRepo.getNewsByName(newsName).articles
 
             } catch (e: Exception) {
-                Log.d("viewModel","Error getting news by name: ${e.message.toString()}")
+                Log.d("viewModel", "Error getting news by name: ${e.message.toString()}")
             }
-
         }
     }
 
-
-    //deals with database
+    /*  Deals with database */
 
     fun getFavoriteNews() {
         viewModelScope.launch {
@@ -57,8 +54,7 @@ class NewsViewModel @Inject constructor(
 
             } catch (e: Exception) {
 
-                Log.d("viewModel","Error getting favorite news: ${e.message.toString()}")
-
+                Log.d("viewModel", "Error getting favorite news: ${e.message.toString()}")
             }
         }
     }
@@ -75,13 +71,11 @@ class NewsViewModel @Inject constructor(
                     newsRepo.deleteNews(article)
                 }
             } catch (e: Exception) {
-                Log.d("viewModel","Error getting toggling favorite news: ${e.message.toString()}")
-
+                Log.d("viewModel", "Error getting toggling favorite news: ${e.message.toString()}")
 
             }
         }
     }
-
 }
 
 

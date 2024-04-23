@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,9 +26,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.game.ag.newscompose.presentation.NewsViewModel
+import com.game.ag.newscompose.presentation.screen.NewsViewModel
 import com.game.ag.newscompose.presentation.components.NewsItem
 import com.game.ag.newscompose.presentation.components.EditTextSearch
+import com.game.ag.newscompose.presentation.components.ShimmerListItem
 import com.game.ag.newscompose.util.checkWifiConnection
 
 @Composable
@@ -53,6 +53,7 @@ fun NewsHomeScreen(
             "Entertainment",
             "Saved"
         )
+
     val wifiConnected = checkWifiConnection(context)
 
     var categorySelectedIndex by remember { mutableIntStateOf(0) }
@@ -124,12 +125,12 @@ fun NewsHomeScreen(
                 }
             } else if (newsResponse.isEmpty()) {
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
+                LazyColumn {
+                    items(15) {
+                        ShimmerListItem(
+                            isLoading = true
+                        )
+                    }
                 }
             } else {
                 LazyColumn {
@@ -145,7 +146,6 @@ fun NewsHomeScreen(
             }
         }
     }
-
 }
 
 
