@@ -51,3 +51,10 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern to 
          <td><img src="https://github.com/AhmedGamalRamadan/NewsCompose/assets/144063315/79f45bed-a14c-48c9-8888-d37b252e0bfe" alt="splash" width="230"></td>
   </tr>
 </table>
+
+## Connect with Me 🌐
+Let's connect! Feel free to reach out on LinkedIn.
+<p align="left">
+<a href="https://www.linkedin.com/in/ahmed-gamal-97509328a/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/ahmed-gamal-97509328a/" height="30" width="40" /></a>
+</p>
+
