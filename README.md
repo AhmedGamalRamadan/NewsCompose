@@ -28,6 +28,9 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern to 
 - **Users can tap on different categories buttons to filter news articles based on their interests.**
 - **Further interactions with the app are still under development.**
 
+## Demo
+Watch the video demo [here](https://www.linkedin.com/posts/ahmed-gamal-ramadan_android-androiddev-jetpackcompose-activity-7189095344276725761-DV1O?utm_source=share&utm_medium=member_desktop)
+
 ## Screenshots:
 <table>
   <tr>
