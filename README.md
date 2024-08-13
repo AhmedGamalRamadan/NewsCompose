@@ -13,6 +13,11 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern to 
 - **Network Connectivity Check:** The app includes functionality to check for network connectivity, ensuring a seamless experience by handling scenarios where the device may be offline or have limited connectivity.
 - **Implements MVVM architecture for clean and organized code.**
 
+
+## Architecture block diagram
+![Android Architecture](https://github.com/lofcoding/AndroidArchitectureSample/assets/109604722/ed29d956-1154-4518-9107-e4e1a34b4a35)
+
+
 ## Installation
 1. **Clone the Repository**: Clone this repository to your local machine.
 2. **Open in Android Studio**: Open the project in Android Studio.
