@@ -18,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +32,7 @@ import com.game.ag.newscompose.presentation.components.NewsItem
 import com.game.ag.newscompose.presentation.components.EditTextSearch
 import com.game.ag.newscompose.presentation.components.ShimmerListItem
 import com.game.ag.newscompose.util.checkWifiConnection
+import kotlinx.coroutines.launch
 
 @Composable
 fun NewsHomeScreen(
@@ -39,6 +41,7 @@ fun NewsHomeScreen(
 
     val context = LocalContext.current
 
+    val scope = rememberCoroutineScope()
     val viewModel = hiltViewModel<NewsViewModel>()
     val newsResponse by viewModel.allNewsResponse.collectAsState()
 
@@ -70,10 +73,13 @@ fun NewsHomeScreen(
                     modifier = Modifier.padding(4.dp),
                     onClick = {
                         categorySelectedIndex = index
-                        if (category == "Saved") {
-                            viewModel.getFavoriteNews()
-                        } else {
-                            viewModel.getNewsByCategory(category)
+
+                        scope.launch{
+                            if (category == "Saved") {
+                                viewModel.getFavoriteNews()
+                            } else {
+                                viewModel.getNewsByCategory(category)
+                            }
                         }
                     },
                     shape = RoundedCornerShape(20.dp),

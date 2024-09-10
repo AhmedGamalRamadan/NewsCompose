@@ -8,7 +8,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.game.ag.newscompose.presentation.screen.home.NewsHomeScreen
 import com.game.ag.newscompose.presentation.screen.details.DetailsScreen
-import com.game.ag.newscompose.util.Constants
 import com.game.ag.newscompose.util.Screen
 
 @Composable
@@ -26,8 +25,9 @@ fun Navigation() {
         }
 
         composable(
-            Screen.DetailsScreen.rout + "/{newsTitle}/{newsDescription}/{newsSourceName}/{newsDate}",
+            Screen.DetailsScreen.rout + "/{newsImage}/{newsTitle}/{newsDescription}/{newsSourceName}/{newsDate}",
             arguments = listOf(
+                navArgument("newsImage") { type = NavType.StringType },
                 navArgument("newsTitle") { type = NavType.StringType },
                 navArgument("newsDescription") { type = NavType.StringType },
                 navArgument("newsSourceName") { type = NavType.StringType },

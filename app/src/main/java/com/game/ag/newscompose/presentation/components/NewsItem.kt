@@ -39,6 +39,7 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.game.ag.newscompose.domain.model.Article
 import com.game.ag.newscompose.util.Screen
+import com.game.ag.newscompose.util.encodeUrl
 
 
 @Composable
@@ -63,6 +64,9 @@ fun NewsItem(
         Icons.Default.FavoriteBorder
     }
 
+    val imageUrl = article.urlToImage?.let { imageUrl ->
+        encodeUrl(imageUrl)
+    } ?: ""
 
     Card(
         shape = RoundedCornerShape(14.dp),
@@ -72,7 +76,7 @@ fun NewsItem(
             .background(Color.White)
             .clickable {
 
-                navHostController.navigate(Screen.DetailsScreen.rout + "/${article.title}/${article.description}/${article.source.name}/${article.publishedAt}")
+                navHostController.navigate(Screen.DetailsScreen.rout + "/${imageUrl}/${article.title}/${article.description}/${article.source.name}/${article.publishedAt}")
 
             }
 

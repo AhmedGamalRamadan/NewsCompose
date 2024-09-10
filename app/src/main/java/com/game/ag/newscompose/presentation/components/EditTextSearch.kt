@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -25,10 +26,15 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.game.ag.newscompose.presentation.screen.NewsViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun EditTextSearch(viewModel: NewsViewModel = hiltViewModel()) {
+fun EditTextSearch(
+    viewModel: NewsViewModel = hiltViewModel()
+) {
+
+    val scope = rememberCoroutineScope()
 
     var txtSearchState by remember {
         mutableStateOf("")
@@ -43,9 +49,6 @@ fun EditTextSearch(viewModel: NewsViewModel = hiltViewModel()) {
             value = txtSearchState,
             onValueChange = { newValue ->
                 txtSearchState = newValue
-                if (txtSearchState.trim().isNotEmpty()) {
-                    viewModel.getNewsByName(newValue)
-                }
             },
             placeholder = { Text(text = "Search ....") },
 
@@ -53,7 +56,14 @@ fun EditTextSearch(viewModel: NewsViewModel = hiltViewModel()) {
                 imeAction = ImeAction.Search
             ),
             keyboardActions = KeyboardActions(
-                onSearch = {keyboardController?.hide()}
+                onSearch = {
+                    keyboardController?.hide()
+                    scope.launch {
+                        if (txtSearchState.trim().isNotEmpty()) {
+                            viewModel.getNewsByName(txtSearchState)
+                        }
+                    }
+                }
             ),
             leadingIcon = {
                 Icon(imageVector = Icons.Rounded.Search, contentDescription = "Search")
