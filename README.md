@@ -4,7 +4,13 @@
 The News App is a mobile application developed using Kotlin and Jetpack Compose. It's designed to fetch news articles from a provided API and display them in a user-friendly interface.
 The application follows the MVVM (Model-View-ViewModel) architecture pattern to ensure separation of concerns and maintainability.
 
+
 ## Features:
+- Listing news.
+- Navigate between different categories of news.
+- Search using keywords.
+
+## Tools & Frameworks:
 - **Jetpack Compose:** The app leverages *Jetpack Compose*, a modern Android UI toolkit, to create a seamless and interactive user experience.
 - **Kotlin:** Developed entirely in *Kotlin*, the codebase benefits from the conciseness and expressiveness of the language, promoting efficient and readable code.
 - **Shimmer Effect:** Utilizes the shimmer effect to provide users with visual feedback while content is loading, enhancing the overall user experience by reducing perceived loading times.
@@ -26,6 +32,8 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern to 
 ## Usage
 - **Upon launching the app, users will be presented with a list of news articles.**
 - **Users can tap on different categories buttons to filter news articles based on their interests.**
+
+## What next? 
 - **Further interactions with the app are still under development.**
 
 ## Demo
